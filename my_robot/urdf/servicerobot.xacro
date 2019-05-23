@@ -1,0 +1,239 @@
+<?xml version='1.0'?>
+
+<robot name="service_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="length_wheel" value="0.05" />
+  <xacro:property name="radius_wheel" value="0.15" />
+  <gazebo reference="body">
+    <material>Gazebo/Blue</material>
+</gazebo>
+  
+  <link name="robot_footprint"></link>
+
+  <joint name="robot_footprint_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="robot_footprint"/>
+    <child link="body" />
+  </joint>
+
+  <link name='body'>
+    <pose>0 0 0.1 0 0 0</pose>
+
+    <inertial>
+      <mass value="8.0"/>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.1" ixy="0" ixz="0"
+          iyy="0.1" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+
+    <collision name='body_collision'>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/> 
+      <geometry>
+        <box size=".8 .4 .4"/>
+      </geometry>
+    </collision>
+
+    <visual name='body_visual'>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".8 .4 .4"/>
+      </geometry>
+      <material name="blue">
+          <color rgba="0 0 1 0"/>
+      </material>
+    </visual>
+  </link>
+   
+  <link name="front_left_wheel">
+       <visual name="front_wheel1">
+	    <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+		<geometry>
+		  <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+		</geometry>
+	   </visual>
+	   
+       <collision name="front_wheel1c">
+	    <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+		<geometry>
+		  <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+		</geometry>
+	   </collision>
+	  <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.1" ixy="0" ixz="0"
+          iyy="0.1" iyz="0"
+          izz="0.1"
+        />
+       </inertial>
+   </link>
+   
+   <joint name="front_left_join" type="continuous"> 
+     <origin xyz="0.3 0.25 -0.15" rpy="0 0 0" />
+     <parent link="body"/>
+     <child link="front_left_wheel" />
+	 <axis xyz="0 1 0" rpy="0 0 0"/>
+   </joint>
+   
+     <link name="front_right_wheel">
+       <visual name="front_wheel2">
+	    <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+		<geometry>
+		  <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+		</geometry>
+	   </visual>
+	   
+       <collision name="front_wheel2c">
+	    <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+		<geometry>
+		  <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+		</geometry>
+	   </collision>
+	  <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.1" ixy="0" ixz="0"
+          iyy="0.1" iyz="0"
+          izz="0.1"
+        />
+       </inertial>
+   </link>
+   
+   <joint name="front_right_join" type="continuous"> 
+     <origin xyz="0.3 -0.25 -0.15" rpy="0 0 0" />
+     <parent link="body"/>
+     <child link="front_right_wheel" />
+     <axis xyz="0 1 0" rpy="0 0 0"/>
+   </joint>
+   
+  <link name="back_left_wheel">
+       <visual name="back_wheel1">
+	    <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+		<geometry>
+		  <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+		</geometry>
+	   </visual>
+	   
+       <collision name="back_wheel1c">
+	    <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+		<geometry>
+		  <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+		</geometry>
+	   </collision>
+	  <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.1" ixy="0" ixz="0"
+          iyy="0.1" iyz="0"
+          izz="0.1"
+        />
+       </inertial>
+   </link>
+   
+   <joint name="back_left_join" type="continuous"> 
+     <origin xyz="-0.3 0.25 -0.15" rpy="0 0 0" />
+     <parent link="body"/>
+     <child link="back_left_wheel" />
+	 <axis xyz="0 1 0" rpy="0 0 0"/>
+   </joint>
+
+     <link name="back_right_wheel">
+       <visual name="back_wheel2">
+	    <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+		<geometry>
+		  <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+		</geometry>
+	   </visual>
+	   
+       <collision name="back_wheel2c">
+	    <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+		<geometry>
+		  <cylinder length="${length_wheel}" radius="${radius_wheel}"/>
+		</geometry>
+	   </collision>
+	  <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.1" ixy="0" ixz="0"
+          iyy="0.1" iyz="0"
+          izz="0.1"
+        />
+       </inertial>
+   </link>
+   
+   <joint name="back_right_join" type="continuous"> 
+     <origin xyz="-0.3 -0.25 -0.15" rpy="0 0 0" />
+     <parent link="body"/>
+     <child link="back_right_wheel" />
+     <axis xyz="0 1 0" rpy="0 0 0"/>
+   </joint>
+
+    <link name="camera">
+     <visual name="visual_camera">
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+         <geometry>
+           <box size="0.05 0.05 0.05"/>
+         </geometry>
+         <material name="red"/>
+     </visual>
+     <collision name="collision_camera">
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+              <box size="0.06 0.06 0.06"/>
+         </geometry>
+     </collision>
+     <inertial>
+       <mass value="0.05"/>
+       <origin xyz="0 0 0" rpy=" 0 0 0"/>
+       <inertia
+          ixx="0.1" ixy="0" ixz="0"
+          iyy="0.1" iyz="0"
+          izz="0.1"
+      />
+     </inertial>
+   </link>
+    <joint type="fixed" name="camera_joint">
+      <origin xyz="0.4 0 0" rpy="0 0 0"/>
+      <child link="camera"/>
+      <parent link="body"/>
+      <axis xyz="0 1 0" rpy="0 0 0"/>
+    </joint>  
+  <link name="hokuyo">
+     <visual name="visual_hokuyo">
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+         <geometry>
+           <mesh filename="package://my_robot/meshes/hokuyo.dae"/>
+         </geometry>
+     </visual>
+     <collision name="collision_hokuyo">
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+              <box size="0.1 0.1 0.1"/>
+         </geometry>
+     </collision>
+     <inertial>
+       <mass value="0.1"/>
+       <origin xyz="0 0 0" rpy=" 0 0 0"/>
+       <inertia
+          ixx="0.000001" ixy="0" ixz="0"
+          iyy="0.000001" iyz="0"
+          izz="0.000001"
+      />
+     </inertial>
+   </link>
+    <joint type="fixed" name="hokuyo_joint">
+      <origin xyz="0.3 0 0.22" rpy="0 0 0"/>
+      <child link="hokuyo"/>
+      <parent link="body"/>
+      <axis xyz="0 1 0" rpy="0 0 0"/>
+    </joint>
+
+
+</robot>
